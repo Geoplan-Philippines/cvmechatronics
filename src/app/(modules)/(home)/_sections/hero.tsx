@@ -1,7 +1,5 @@
-"use client";
-
 import Image from "next/image";
-import { motion } from "motion/react";
+import * as motion from "motion/react-client";
 
 const ease = [0.25, 1, 0.5, 1] as const;
 
@@ -76,23 +74,8 @@ export default function Hero() {
             </a>
             <a
               href="#services"
-              className="inline-flex items-center justify-center font-body font-medium uppercase tracking-[0.04em] rounded-md transition-all duration-150"
-              style={{
-                fontSize: "0.8125rem",
-                padding: "13px 31px",
-                color: "#FCFBFC",
-                border: "1px solid rgba(252,251,252,0.35)",
-              }}
-              onMouseEnter={(e) => {
-                const el = e.currentTarget as HTMLAnchorElement;
-                el.style.borderColor = "rgba(252,251,252,0.65)";
-                el.style.backgroundColor = "rgba(252,251,252,0.08)";
-              }}
-              onMouseLeave={(e) => {
-                const el = e.currentTarget as HTMLAnchorElement;
-                el.style.borderColor = "rgba(252,251,252,0.35)";
-                el.style.backgroundColor = "transparent";
-              }}
+              className="inline-flex items-center justify-center font-body font-medium uppercase tracking-[0.04em] rounded-md transition-all duration-150 text-paper border border-paper/35 hover:border-paper/65 hover:bg-paper/8"
+              style={{ fontSize: "0.8125rem", padding: "13px 31px" }}
             >
               Explore Services
             </a>

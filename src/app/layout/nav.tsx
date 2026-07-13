@@ -41,7 +41,7 @@ export default function Nav() {
       <nav
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
         style={{
-          backgroundColor: scrolled ? "#FCFBFC" : "transparent",
+          backgroundColor: scrolled ? "var(--color-paper)" : "transparent",
           borderBottom: scrolled ? "1px solid rgba(14,38,70,0.08)" : "none",
           boxShadow: scrolled ? "0 4px 20px rgba(14,38,70,0.10)" : "none",
         }}
@@ -69,7 +69,7 @@ export default function Nav() {
             <span
               className="font-display font-bold uppercase transition-colors duration-300"
               style={{
-                color: scrolled ? "#0E2646" : "#FCFBFC",
+                color: scrolled ? "var(--color-navy)" : "var(--color-paper)",
                 fontSize: "1.0625rem",
                 letterSpacing: "-0.01em",
               }}
@@ -86,10 +86,10 @@ export default function Nav() {
                 href={l.href}
                 className="font-body font-medium transition-opacity duration-150 hover:opacity-60"
                 style={{
-                  color: scrolled ? "#0E2646" : "#FCFBFC",
+                  color: scrolled ? "var(--color-navy)" : "var(--color-paper)",
                   fontSize: "0.9rem",
                   letterSpacing: "0.02em",
-                  borderBottom: isActive(l.href) ? "2px solid #ED9D18" : "2px solid transparent",
+                  borderBottom: isActive(l.href) ? "2px solid var(--color-amber)" : "2px solid transparent",
                   paddingBottom: "2px",
                 }}
               >
@@ -122,7 +122,7 @@ export default function Nav() {
                   key={i}
                   className="block w-5 h-0.5 transition-all duration-200"
                   style={{
-                    backgroundColor: scrolled || open ? "#0E2646" : "#FCFBFC",
+                    backgroundColor: scrolled || open ? "var(--color-navy)" : "var(--color-paper)",
                     opacity: open ? 0 : 1,
                   }}
                 />
@@ -131,7 +131,7 @@ export default function Nav() {
                   key={i}
                   className="block w-5 h-0.5 transition-all duration-200 origin-center"
                   style={{
-                    backgroundColor: open ? "#FCFBFC" : scrolled ? "#0E2646" : "#FCFBFC",
+                    backgroundColor: open ? "var(--color-paper)" : scrolled ? "var(--color-navy)" : "var(--color-paper)",
                     transform: transform ?? "none",
                   }}
                 />
@@ -151,7 +151,7 @@ export default function Nav() {
             exit={{ opacity: 0, x: "100%" }}
             transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
             className="fixed inset-0 z-40 flex flex-col"
-            style={{ backgroundColor: "#0E2646" }}
+            style={{ backgroundColor: "var(--color-navy)" }}
           >
             <div className="flex flex-col gap-1 pt-24 px-8">
               {links.map((l, i) => (

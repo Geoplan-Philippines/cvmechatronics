@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import AnimateIn from "@/app/shared/ui/animate-in";
 
@@ -196,15 +194,15 @@ function ProductRow({ p }: { p: Product }) {
           {p.name}
         </p>
         <p
-          className="font-body shrink-0"
-          style={{ fontSize: "0.8125rem", lineHeight: 1.4, color: "#5A6780", maxWidth: "28ch", textAlign: "right" }}
+          className="font-body shrink-0 text-muted"
+          style={{ fontSize: "0.8125rem", lineHeight: 1.4, maxWidth: "28ch", textAlign: "right" }}
         >
           {p.spec}
         </p>
       </div>
       <p
-        className="font-body mt-1"
-        style={{ fontSize: "0.875rem", lineHeight: 1.55, color: "#5A6780" }}
+        className="font-body mt-1 text-muted"
+        style={{ fontSize: "0.875rem", lineHeight: 1.55 }}
       >
         {p.use}
       </p>
@@ -248,10 +246,8 @@ export default function ProductsCatalog() {
       {categories.map((cat, ci) => (
         <section
           key={cat.id}
-          style={{
-            backgroundColor: cat.dark ? "#0E2646" : "#FCFBFC",
-            padding: "clamp(4rem,7vw,7rem) 0",
-          }}
+          className={cat.dark ? "bg-navy" : "bg-paper"}
+          style={{ padding: "clamp(4rem,7vw,7rem) 0" }}
         >
           <div className="max-w-7xl mx-auto px-6">
             <AnimateIn delay={0}>
@@ -259,22 +255,17 @@ export default function ProductsCatalog() {
                 {/* Category label + desc */}
                 <div className="lg:w-72 shrink-0">
                   <span
-                    className="font-body font-medium block mb-2"
-                    style={{
-                      fontSize: "0.75rem",
-                      letterSpacing: "0.04em",
-                      color: cat.dark ? "#ED9D18" : "#5A6780",
-                    }}
+                    className={`font-body font-medium block mb-2 ${cat.dark ? "text-amber" : "text-muted"}`}
+                    style={{ fontSize: "0.75rem", letterSpacing: "0.04em" }}
                   >
                     {String(ci + 1).padStart(2, "0")} / {String(categories.length).padStart(2, "0")}
                   </span>
                   <h2
-                    className="font-display font-bold uppercase text-balance"
+                    className="font-display font-bold uppercase text-balance text-amber"
                     style={{
                       fontSize: "clamp(1.5rem,2.5vw,2.25rem)",
                       lineHeight: 1.15,
                       letterSpacing: "-0.015em",
-                      color: "#ED9D18",
                     }}
                   >
                     {cat.name}
@@ -284,7 +275,7 @@ export default function ProductsCatalog() {
                     style={{
                       fontSize: "0.9375rem",
                       lineHeight: 1.65,
-                      color: cat.dark ? "rgba(252,251,252,0.60)" : "#5A6780",
+                      color: cat.dark ? "rgba(252,251,252,0.60)" : "var(--color-muted)",
                       maxWidth: "30ch",
                     }}
                   >

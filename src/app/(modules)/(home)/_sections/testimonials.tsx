@@ -1,6 +1,4 @@
-"use client";
-
-import { motion } from "motion/react";
+import * as motion from "motion/react-client";
 
 const ease = [0.25, 1, 0.5, 1] as const;
 
@@ -31,11 +29,11 @@ function QuoteIcon() {
       viewBox="0 0 32 24"
       fill="none"
       aria-hidden="true"
-      className="mb-5 opacity-40"
+      className="mb-5 opacity-40 text-amber"
     >
       <path
         d="M0 24V14.4C0 6.4 4.8 1.6 14.4 0l1.6 3.2C11.2 4.8 8.8 7.2 8 12h6.4V24H0zm17.6 0V14.4C17.6 6.4 22.4 1.6 32 0l1.6 3.2C28.8 4.8 26.4 7.2 25.6 12H32V24H17.6z"
-        fill="#ED9D18"
+        fill="currentColor"
       />
     </svg>
   );

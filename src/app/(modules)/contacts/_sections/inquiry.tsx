@@ -15,28 +15,42 @@ const SERVICE_OPTIONS = [
 
 const inputStyle: CSSProperties = {
   width: "100%",
-  backgroundColor: "#F4F5F7",
+  backgroundColor: "var(--color-surface)",
   border: "1px solid transparent",
   borderRadius: "6px",
   padding: "12px 14px",
   fontSize: "0.9375rem",
-  fontFamily: "var(--font-barlow), system-ui, sans-serif",
-  color: "#0E2646",
+  color: "var(--color-navy)",
   outline: "none",
   transition: "border-color 150ms ease",
 };
 
-function Field({ label, id, children }: { label: string; id: string; children: React.ReactNode }) {
+function Field({
+  label,
+  id,
+  error,
+  children,
+}: {
+  label: string;
+  id: string;
+  error?: string;
+  children: React.ReactNode;
+}) {
   return (
     <div className="flex flex-col gap-1.5">
       <label
         htmlFor={id}
-        className="font-body font-medium"
-        style={{ fontSize: "0.8125rem", letterSpacing: "0.02em", color: "#5A6780" }}
+        className="font-body font-medium text-muted"
+        style={{ fontSize: "0.8125rem", letterSpacing: "0.02em" }}
       >
         {label}
       </label>
       {children}
+      {error && (
+        <p id={`${id}-error`} className="font-body text-red-600 text-xs" role="alert">
+          {error}
+        </p>
+      )}
     </div>
   );
 }
@@ -47,10 +61,10 @@ const contactItems = [
     value: "+63 (0) 000 000 0000",
     href: "tel:+63000000000",
     icon: (
-      <svg width="18" height="18" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+      <svg width="18" height="18" fill="none" viewBox="0 0 24 24" aria-hidden="true" className="text-amber">
         <path
           d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.07 11.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012.98 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.89a16 16 0 006.86 6.86l1.26-1.26a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"
-          stroke="#ED9D18"
+          stroke="currentColor"
           strokeWidth="1.75"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -63,9 +77,9 @@ const contactItems = [
     value: "info@cvmechatronics.com",
     href: "mailto:info@cvmechatronics.com",
     icon: (
-      <svg width="18" height="18" fill="none" viewBox="0 0 24 24" aria-hidden="true">
-        <rect x="2" y="4" width="20" height="16" rx="2" stroke="#ED9D18" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
-        <polyline points="22,6 12,13 2,6" stroke="#ED9D18" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+      <svg width="18" height="18" fill="none" viewBox="0 0 24 24" aria-hidden="true" className="text-amber">
+        <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+        <polyline points="22,6 12,13 2,6" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
   },
@@ -74,9 +88,9 @@ const contactItems = [
     value: "Philippines",
     href: null,
     icon: (
-      <svg width="18" height="18" fill="none" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z" stroke="#ED9D18" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
-        <circle cx="12" cy="10" r="3" stroke="#ED9D18" strokeWidth="1.75" />
+      <svg width="18" height="18" fill="none" viewBox="0 0 24 24" aria-hidden="true" className="text-amber">
+        <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+        <circle cx="12" cy="10" r="3" stroke="currentColor" strokeWidth="1.75" />
       </svg>
     ),
   },
@@ -96,6 +110,7 @@ export default function Inquiry() {
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState<{ name?: string; phone?: string }>({});
 
   const toggleService = (s: string) =>
     setSelectedServices((prev) =>
@@ -104,6 +119,14 @@ export default function Inquiry() {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    const next: { name?: string; phone?: string } = {};
+    if (!name.trim()) next.name = "Full name is required.";
+    if (!phone.trim()) next.phone = "Phone number is required.";
+    if (Object.keys(next).length) {
+      setErrors(next);
+      return;
+    }
+    setErrors({});
     const subject = `Inquiry from ${name} — ${propertyType} Property`;
     const body = [
       `Name: ${name}`,
@@ -136,10 +159,10 @@ export default function Inquiry() {
                   className="w-12 h-12 rounded-full flex items-center justify-center shrink-0"
                   style={{ backgroundColor: "rgba(237,157,24,0.12)" }}
                 >
-                  <svg width="22" height="22" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+                  <svg width="22" height="22" fill="none" viewBox="0 0 24 24" aria-hidden="true" className="text-amber">
                     <path
                       d="M5 13l4 4L19 7"
-                      stroke="#ED9D18"
+                      stroke="currentColor"
                       strokeWidth="2.25"
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -152,7 +175,7 @@ export default function Inquiry() {
                 >
                   Inquiry sent.
                 </h2>
-                <p className="font-body" style={{ fontSize: "1rem", lineHeight: 1.7, color: "#5A6780", maxWidth: "46ch" }}>
+                <p className="font-body text-muted" style={{ fontSize: "1rem", lineHeight: 1.7, maxWidth: "46ch" }}>
                   We&apos;ll review your message and reach out within one business day.
                   Your email client may have opened a draft — feel free to close it if so.
                 </p>
@@ -162,31 +185,41 @@ export default function Inquiry() {
 
                 {/* Name + Phone */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <Field label="Full name" id="name">
+                  <Field label="Full name" id="name" error={errors.name}>
                     <input
                       id="name"
                       type="text"
                       required
                       autoComplete="name"
                       value={name}
-                      onChange={(e) => setName(e.target.value)}
+                      onChange={(e) => {
+                        setName(e.target.value);
+                        if (errors.name) setErrors((p) => ({ ...p, name: undefined }));
+                      }}
                       placeholder="Juan dela Cruz"
                       style={inputStyle}
-                      onFocus={(e) => (e.currentTarget.style.borderColor = "#ED9D18")}
+                      aria-describedby={errors.name ? "name-error" : undefined}
+                      aria-invalid={!!errors.name}
+                      onFocus={(e) => (e.currentTarget.style.borderColor = "var(--color-amber)")}
                       onBlur={(e) => (e.currentTarget.style.borderColor = "transparent")}
                     />
                   </Field>
-                  <Field label="Phone number" id="phone">
+                  <Field label="Phone number" id="phone" error={errors.phone}>
                     <input
                       id="phone"
                       type="tel"
                       required
                       autoComplete="tel"
                       value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
+                      onChange={(e) => {
+                        setPhone(e.target.value);
+                        if (errors.phone) setErrors((p) => ({ ...p, phone: undefined }));
+                      }}
                       placeholder="+63 9XX XXX XXXX"
                       style={inputStyle}
-                      onFocus={(e) => (e.currentTarget.style.borderColor = "#ED9D18")}
+                      aria-describedby={errors.phone ? "phone-error" : undefined}
+                      aria-invalid={!!errors.phone}
+                      onFocus={(e) => (e.currentTarget.style.borderColor = "var(--color-amber)")}
                       onBlur={(e) => (e.currentTarget.style.borderColor = "transparent")}
                     />
                   </Field>
@@ -202,7 +235,7 @@ export default function Inquiry() {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="juan@example.com"
                     style={inputStyle}
-                    onFocus={(e) => (e.currentTarget.style.borderColor = "#ED9D18")}
+                    onFocus={(e) => (e.currentTarget.style.borderColor = "var(--color-amber)")}
                     onBlur={(e) => (e.currentTarget.style.borderColor = "transparent")}
                   />
                 </Field>
@@ -210,8 +243,8 @@ export default function Inquiry() {
                 {/* Property type */}
                 <div className="flex flex-col gap-2.5">
                   <span
-                    className="font-body font-medium"
-                    style={{ fontSize: "0.8125rem", letterSpacing: "0.02em", color: "#5A6780" }}
+                    className="font-body font-medium text-muted"
+                    style={{ fontSize: "0.8125rem", letterSpacing: "0.02em" }}
                   >
                     Property type
                   </span>
@@ -219,8 +252,8 @@ export default function Inquiry() {
                     {["Residential", "Commercial"].map((type) => (
                       <label
                         key={type}
-                        className="flex items-center gap-2 cursor-pointer font-body"
-                        style={{ fontSize: "0.9375rem", color: "#0E2646" }}
+                        className="flex items-center gap-2 cursor-pointer font-body text-navy"
+                        style={{ fontSize: "0.9375rem" }}
                       >
                         <input
                           type="radio"
@@ -228,7 +261,7 @@ export default function Inquiry() {
                           value={type}
                           checked={propertyType === type}
                           onChange={() => setPropertyType(type)}
-                          style={{ accentColor: "#ED9D18", width: "16px", height: "16px", cursor: "pointer" }}
+                          className="accent-amber cursor-pointer w-4 h-4"
                         />
                         {type}
                       </label>
@@ -239,8 +272,8 @@ export default function Inquiry() {
                 {/* Services */}
                 <div className="flex flex-col gap-3">
                   <span
-                    className="font-body font-medium"
-                    style={{ fontSize: "0.8125rem", letterSpacing: "0.02em", color: "#5A6780" }}
+                    className="font-body font-medium text-muted"
+                    style={{ fontSize: "0.8125rem", letterSpacing: "0.02em" }}
                   >
                     Services you&apos;re interested in
                   </span>
@@ -257,8 +290,8 @@ export default function Inquiry() {
                           style={{
                             fontSize: "0.8125rem",
                             padding: "8px 14px",
-                            backgroundColor: active ? "rgba(237,157,24,0.12)" : "#F4F5F7",
-                            color: active ? "#C8861A" : "#5A6780",
+                            backgroundColor: active ? "rgba(237,157,24,0.12)" : "var(--color-surface)",
+                            color: active ? "var(--color-amber-deep)" : "var(--color-muted)",
                             border: `1px solid ${active ? "rgba(237,157,24,0.45)" : "transparent"}`,
                           }}
                         >
@@ -278,7 +311,7 @@ export default function Inquiry() {
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Describe your property, the systems you're interested in, or any specific requirements..."
                     style={{ ...inputStyle, resize: "vertical", lineHeight: 1.65 }}
-                    onFocus={(e) => (e.currentTarget.style.borderColor = "#ED9D18")}
+                    onFocus={(e) => (e.currentTarget.style.borderColor = "var(--color-amber)")}
                     onBlur={(e) => (e.currentTarget.style.borderColor = "transparent")}
                   />
                 </Field>
@@ -322,23 +355,21 @@ export default function Inquiry() {
                     </div>
                     <div>
                       <p
-                        className="font-body font-medium"
-                        style={{ fontSize: "0.8125rem", color: "#5A6780", marginBottom: "2px" }}
+                        className="font-body font-medium text-muted"
+                        style={{ fontSize: "0.8125rem", marginBottom: "2px" }}
                       >
                         {label}
                       </p>
                       {href ? (
                         <a
                           href={href}
-                          className="font-body transition-colors duration-150"
-                          style={{ fontSize: "0.9375rem", color: "#0E2646" }}
-                          onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "#ED9D18")}
-                          onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "#0E2646")}
+                          className="font-body transition-colors duration-150 text-navy hover:text-amber"
+                          style={{ fontSize: "0.9375rem" }}
                         >
                           {value}
                         </a>
                       ) : (
-                        <p className="font-body" style={{ fontSize: "0.9375rem", color: "#0E2646" }}>
+                        <p className="font-body text-navy" style={{ fontSize: "0.9375rem" }}>
                           {value}
                         </p>
                       )}
@@ -361,7 +392,7 @@ export default function Inquiry() {
               >
                 Office Hours
               </h3>
-              <p className="font-body" style={{ fontSize: "0.9375rem", lineHeight: 1.7, color: "#5A6780" }}>
+              <p className="font-body text-muted" style={{ fontSize: "0.9375rem", lineHeight: 1.7 }}>
                 Monday – Saturday<br />
                 8:00 AM – 5:00 PM
               </p>
@@ -384,12 +415,12 @@ export default function Inquiry() {
                 {nextSteps.map((text, i) => (
                   <li key={i} className="flex gap-3 items-start">
                     <span
-                      className="font-display font-bold shrink-0"
-                      style={{ fontSize: "0.875rem", color: "#ED9D18", lineHeight: "1.6rem" }}
+                      className="font-display font-bold shrink-0 text-amber"
+                      style={{ fontSize: "0.875rem", lineHeight: "1.6rem" }}
                     >
                       {i + 1}
                     </span>
-                    <p className="font-body" style={{ fontSize: "0.9rem", lineHeight: 1.65, color: "#5A6780" }}>
+                    <p className="font-body text-muted" style={{ fontSize: "0.9rem", lineHeight: 1.65 }}>
                       {text}
                     </p>
                   </li>

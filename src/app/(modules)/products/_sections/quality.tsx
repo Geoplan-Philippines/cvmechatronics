@@ -1,6 +1,4 @@
-"use client";
-
-import { motion } from "motion/react";
+import * as motion from "motion/react-client";
 
 const ease = [0.25, 1, 0.5, 1] as const;
 
@@ -57,11 +55,7 @@ export default function QualityStandard() {
                 border: "1px solid rgba(255,255,255,0.08)",
               }}
             >
-              <div
-                className="w-8 h-0.5 mb-6"
-                style={{ backgroundColor: "#ED9D18" }}
-                aria-hidden="true"
-              />
+              <div className="w-8 h-0.5 mb-6 bg-amber" aria-hidden="true" />
               <h3
                 className="font-body font-semibold text-amber"
                 style={{ fontSize: "clamp(1rem,1.3vw,1.25rem)", lineHeight: 1.3 }}

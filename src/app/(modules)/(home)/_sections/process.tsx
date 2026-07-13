@@ -1,6 +1,4 @@
-"use client";
-
-import { motion } from "motion/react";
+import * as motion from "motion/react-client";
 
 const ease = [0.25, 1, 0.5, 1] as const;
 

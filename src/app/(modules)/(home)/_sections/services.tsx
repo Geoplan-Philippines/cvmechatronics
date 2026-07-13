@@ -1,6 +1,5 @@
-"use client";
-
 import Image from "next/image";
+import Link from "next/link";
 import AnimateIn from "@/app/shared/ui/animate-in";
 
 export default function Services() {
@@ -21,22 +20,22 @@ export default function Services() {
                 What We Install
               </h2>
               <p
-                className="font-body mt-3 max-w-lg"
-                style={{ fontSize: "1rem", lineHeight: 1.65, color: "#5A6780" }}
+                className="font-body mt-3 max-w-lg text-muted"
+                style={{ fontSize: "1rem", lineHeight: 1.65 }}
               >
                 Four core systems. One integrated solution for residential and commercial properties.
               </p>
             </div>
-            <a
+            <Link
               href="/solutions"
-              className="inline-flex items-center gap-2 font-body font-medium shrink-0 transition-opacity duration-150 hover:opacity-60"
-              style={{ fontSize: "0.8125rem", letterSpacing: "0.02em", color: "#0E2646" }}
+              className="inline-flex items-center gap-2 font-body font-medium shrink-0 transition-opacity duration-150 hover:opacity-60 text-navy"
+              style={{ fontSize: "0.8125rem", letterSpacing: "0.02em" }}
             >
               All solutions
               <svg width="14" height="14" fill="none" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-            </a>
+            </Link>
           </div>
         </AnimateIn>
 
@@ -118,24 +117,24 @@ export default function Services() {
           {/* Lighting & CCTV — surface fill, no photo */}
           <AnimateIn delay={0.15}>
             <div
-              className="rounded-lg p-6 md:p-8 flex flex-col justify-between h-full transition-shadow duration-150 hover:shadow-[0_2px_8px_rgba(14,38,70,0.10)]"
-              style={{ backgroundColor: "#F4F5F7", minHeight: "200px" }}
+              className="rounded-lg p-6 md:p-8 flex flex-col justify-between h-full transition-shadow duration-150 hover:shadow-[0_2px_8px_rgba(14,38,70,0.10)] bg-surface"
+              style={{ minHeight: "200px" }}
             >
               <div>
                 <div
                   className="w-10 h-10 rounded-md flex items-center justify-center mb-5"
                   style={{ backgroundColor: "rgba(237,157,24,0.12)" }}
                 >
-                  <svg width="20" height="20" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+                  <svg width="20" height="20" fill="none" viewBox="0 0 24 24" aria-hidden="true" className="text-amber">
                     <path
                       d="M15 10a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"
-                      stroke="#ED9D18"
+                      stroke="currentColor"
                       strokeWidth="1.75"
                       strokeLinecap="round"
                     />
                     <path
                       d="M2 10c0-4.418 4.477-8 10-8s10 3.582 10 8-4.477 8-10 8a15.3 15.3 0 0 1-3.6-.426L4 22l1.04-3.8A8.64 8.64 0 0 1 2 10z"
-                      stroke="#ED9D18"
+                      stroke="currentColor"
                       strokeWidth="1.75"
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -149,8 +148,8 @@ export default function Services() {
                   Security &amp; Lighting
                 </h3>
                 <p
-                  className="font-body mt-2"
-                  style={{ fontSize: "0.9375rem", lineHeight: 1.65, color: "#5A6780" }}
+                  className="font-body mt-2 text-muted"
+                  style={{ fontSize: "0.9375rem", lineHeight: 1.65 }}
                 >
                   24/7 HD surveillance with automated lighting that activates on schedule or
                   motion — synced to your routine.
@@ -162,27 +161,27 @@ export default function Services() {
           {/* App Control — navy fill, no photo */}
           <AnimateIn delay={0.2}>
             <div
-              className="rounded-lg p-6 md:p-8 flex flex-col justify-between h-full transition-all duration-150 hover:opacity-90"
-              style={{ backgroundColor: "#0E2646", minHeight: "200px" }}
+              className="rounded-lg p-6 md:p-8 flex flex-col justify-between h-full transition-all duration-150 hover:opacity-90 bg-navy"
+              style={{ minHeight: "200px" }}
             >
               <div>
                 <div
                   className="w-10 h-10 rounded-md flex items-center justify-center mb-5"
                   style={{ backgroundColor: "rgba(237,157,24,0.18)" }}
                 >
-                  <svg width="20" height="20" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+                  <svg width="20" height="20" fill="none" viewBox="0 0 24 24" aria-hidden="true" className="text-amber">
                     <rect
                       x="5"
                       y="2"
                       width="14"
                       height="20"
                       rx="3"
-                      stroke="#ED9D18"
+                      stroke="currentColor"
                       strokeWidth="1.75"
                     />
                     <path
                       d="M9 7h6M9 11h6M9 15h4"
-                      stroke="#ED9D18"
+                      stroke="currentColor"
                       strokeWidth="1.75"
                       strokeLinecap="round"
                     />

@@ -1,7 +1,5 @@
-"use client";
-
 import Image from "next/image";
-import { motion } from "motion/react";
+import * as motion from "motion/react-client";
 
 const ease = [0.25, 1, 0.5, 1] as const;
 
@@ -26,10 +24,10 @@ const features = [
 
 function CheckIcon() {
   return (
-    <svg width="18" height="18" fill="none" viewBox="0 0 24 24" aria-hidden="true">
+    <svg width="18" height="18" fill="none" viewBox="0 0 24 24" aria-hidden="true" className="text-amber">
       <path
         d="M20 6 9 17l-5-5"
-        stroke="#ED9D18"
+        stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -59,7 +57,6 @@ export default function WhyUs() {
               className="object-cover object-center"
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
-            {/* Subtle navy tint */}
             <div
               className="absolute inset-0"
               style={{ background: "rgba(14,38,70,0.12)" }}
@@ -86,8 +83,8 @@ export default function WhyUs() {
                 Built for the Long Run
               </h2>
               <p
-                className="font-body mt-4"
-                style={{ fontSize: "1rem", lineHeight: 1.65, color: "#5A6780", maxWidth: "42ch" }}
+                className="font-body mt-4 text-muted"
+                style={{ fontSize: "1rem", lineHeight: 1.65, maxWidth: "42ch" }}
               >
                 We don&apos;t cut corners on equipment or installation. Every system we install is
                 designed to work reliably, day after day.
@@ -115,8 +112,8 @@ export default function WhyUs() {
                       {f.title}
                     </p>
                     <p
-                      className="font-body mt-1"
-                      style={{ fontSize: "0.9rem", lineHeight: 1.65, color: "#5A6780" }}
+                      className="font-body mt-1 text-muted"
+                      style={{ fontSize: "0.9rem", lineHeight: 1.65 }}
                     >
                       {f.desc}
                     </p>

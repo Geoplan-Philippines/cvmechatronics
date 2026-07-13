@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 
@@ -15,7 +13,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 gap-10">
         {/* Brand */}
         <div>
-          <a href="/" className="flex items-center gap-3 mb-3">
+          <Link href="/" className="flex items-center gap-3 mb-3">
             <div className="relative w-10 h-10 shrink-0">
               <Image
                 src="/assets/cv-mechatronics-logo-navy-variant.png"
@@ -30,7 +28,7 @@ export default function Footer() {
             >
               CV Mechatronics
             </span>
-          </a>
+          </Link>
           <p
             className="font-body mt-2"
             style={{ fontSize: "0.9rem", lineHeight: 1.65, color: "rgba(252,251,252,0.50)", maxWidth: "28ch" }}
@@ -52,10 +50,8 @@ export default function Footer() {
               <li key={l.href}>
                 <Link
                   href={l.href}
-                  className="font-body transition-colors duration-150"
-                  style={{ fontSize: "0.9375rem", color: "rgba(252,251,252,0.65)" }}
-                  onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "#FCFBFC")}
-                  onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "rgba(252,251,252,0.65)")}
+                  className="font-body transition-colors duration-150 text-paper/65 hover:text-paper"
+                  style={{ fontSize: "0.9375rem" }}
                 >
                   {l.label}
                 </Link>
@@ -76,10 +72,8 @@ export default function Footer() {
             <li>
               <a
                 href="mailto:info@cvmechatronics.com"
-                className="font-body transition-colors duration-150"
-                style={{ fontSize: "0.9375rem", color: "rgba(252,251,252,0.65)" }}
-                onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "#FCFBFC")}
-                onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "rgba(252,251,252,0.65)")}
+                className="font-body transition-colors duration-150 text-paper/65 hover:text-paper"
+                style={{ fontSize: "0.9375rem" }}
               >
                 info@cvmechatronics.com
               </a>
@@ -87,10 +81,8 @@ export default function Footer() {
             <li>
               <a
                 href="tel:+63000000000"
-                className="font-body transition-colors duration-150"
-                style={{ fontSize: "0.9375rem", color: "rgba(252,251,252,0.65)" }}
-                onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "#FCFBFC")}
-                onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "rgba(252,251,252,0.65)")}
+                className="font-body transition-colors duration-150 text-paper/65 hover:text-paper"
+                style={{ fontSize: "0.9375rem" }}
               >
                 +63 (0) 000 000 0000
               </a>

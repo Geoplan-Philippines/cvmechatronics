@@ -1,7 +1,5 @@
-"use client";
-
 import Image from "next/image";
-import { motion } from "motion/react";
+import * as motion from "motion/react-client";
 
 const ease = [0.25, 1, 0.5, 1] as const;
 
@@ -21,21 +19,16 @@ const commercial = [
   "Access logs and multi-user app permissions",
 ];
 
-function ListItem({ text, light = false }: { text: string; light?: boolean }) {
+function ListItem({ text }: { text: string }) {
   return (
     <li className="flex items-start gap-3">
       <span
-        className="shrink-0 mt-[7px] w-1.5 h-1.5 rounded-full"
-        style={{ backgroundColor: "#ED9D18" }}
+        className="shrink-0 mt-[7px] w-1.5 h-1.5 rounded-full bg-amber"
         aria-hidden="true"
       />
       <span
         className="font-body"
-        style={{
-          fontSize: "0.9375rem",
-          lineHeight: 1.65,
-          color: light ? "rgba(252,251,252,0.82)" : "rgba(252,251,252,0.75)",
-        }}
+        style={{ fontSize: "0.9375rem", lineHeight: 1.65, color: "rgba(252,251,252,0.82)" }}
       >
         {text}
       </span>
@@ -94,8 +87,8 @@ export default function Applications() {
             />
             <div className="absolute inset-0 p-8 flex flex-col justify-end">
               <p
-                className="font-body font-medium mb-3"
-                style={{ fontSize: "0.75rem", letterSpacing: "0.05em", color: "#ED9D18" }}
+                className="font-body font-medium mb-3 text-amber"
+                style={{ fontSize: "0.75rem", letterSpacing: "0.05em" }}
               >
                 RESIDENTIAL
               </p>
@@ -139,8 +132,8 @@ export default function Applications() {
             />
             <div className="absolute inset-0 p-8 flex flex-col justify-end">
               <p
-                className="font-body font-medium mb-3"
-                style={{ fontSize: "0.75rem", letterSpacing: "0.05em", color: "#ED9D18" }}
+                className="font-body font-medium mb-3 text-amber"
+                style={{ fontSize: "0.75rem", letterSpacing: "0.05em" }}
               >
                 COMMERCIAL
               </p>

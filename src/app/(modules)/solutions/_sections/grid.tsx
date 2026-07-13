@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import AnimateIn from "@/app/shared/ui/animate-in";
 
@@ -97,8 +95,8 @@ const solutions: Solution[] = [
 
 function CheckIcon() {
   return (
-    <svg width="13" height="13" fill="none" viewBox="0 0 24 24" aria-hidden="true" className="shrink-0 mt-[3px]">
-      <path d="M20 6 9 17l-5-5" stroke="#ED9D18" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" />
+    <svg width="13" height="13" fill="none" viewBox="0 0 24 24" aria-hidden="true" className="shrink-0 mt-[3px] text-amber">
+      <path d="M20 6 9 17l-5-5" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -126,8 +124,8 @@ export default function SolutionsGrid() {
             What We Install
           </h2>
           <p
-            className="font-body mt-3 max-w-lg"
-            style={{ fontSize: "1rem", lineHeight: 1.65, color: "#5A6780" }}
+            className="font-body mt-3 max-w-lg text-muted"
+            style={{ fontSize: "1rem", lineHeight: 1.65 }}
           >
             Each solution is deployed as a standalone system or integrated into a single unified control layer.
           </p>
@@ -137,7 +135,7 @@ export default function SolutionsGrid() {
         <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4">
           {photoSolutions.map((s, i) => (
             <AnimateIn key={s.id} delay={i * 0.07}>
-              <div className="rounded-lg overflow-hidden h-full flex flex-col" style={{ backgroundColor: "#F4F5F7" }}>
+              <div className="rounded-lg overflow-hidden h-full flex flex-col bg-surface">
                 {/* Photo strip */}
                 <div className="relative shrink-0" style={{ height: "200px" }}>
                   <Image
@@ -171,8 +169,8 @@ export default function SolutionsGrid() {
                 {/* Content */}
                 <div className="p-6 flex flex-col flex-1">
                   <p
-                    className="font-body"
-                    style={{ fontSize: "0.9rem", lineHeight: 1.65, color: "#5A6780" }}
+                    className="font-body text-muted"
+                    style={{ fontSize: "0.9rem", lineHeight: 1.65 }}
                   >
                     {s.desc}
                   </p>
@@ -181,8 +179,8 @@ export default function SolutionsGrid() {
                       <li key={f} className="flex items-start gap-2">
                         <CheckIcon />
                         <span
-                          className="font-body"
-                          style={{ fontSize: "0.8125rem", lineHeight: 1.5, color: "#0E2646" }}
+                          className="font-body text-navy"
+                          style={{ fontSize: "0.8125rem", lineHeight: 1.5 }}
                         >
                           {f}
                         </span>
@@ -200,27 +198,24 @@ export default function SolutionsGrid() {
           {textSolutions.map((s, i) => (
             <AnimateIn key={s.id} delay={0.21 + i * 0.07}>
               <div
-                className="rounded-lg p-8 h-full transition-shadow duration-150 hover:shadow-[0_2px_8px_rgba(14,38,70,0.10)]"
-                style={{ backgroundColor: s.dark ? "#0E2646" : "#F4F5F7" }}
+                className={`rounded-lg p-8 h-full transition-shadow duration-150 hover:shadow-[0_2px_8px_rgba(14,38,70,0.10)] ${s.dark ? "bg-navy" : "bg-surface"}`}
               >
                 <div className="flex items-start gap-3 mb-4">
                   <span
-                    className="font-body font-semibold"
+                    className="font-body font-semibold text-amber"
                     style={{
                       fontSize: "1.25rem",
                       lineHeight: 1,
                       letterSpacing: "-0.02em",
-                      color: "#ED9D18",
                     }}
                   >
                     {s.label}
                   </span>
                   <h3
-                    className="font-body font-semibold mt-0.5"
+                    className="font-body font-semibold mt-0.5 text-amber"
                     style={{
                       fontSize: "clamp(1.125rem,1.5vw,1.375rem)",
                       lineHeight: 1.25,
-                      color: "#ED9D18",
                     }}
                   >
                     {s.name}
@@ -232,7 +227,7 @@ export default function SolutionsGrid() {
                   style={{
                     fontSize: "0.9375rem",
                     lineHeight: 1.65,
-                    color: s.dark ? "rgba(252,251,252,0.60)" : "#5A6780",
+                    color: s.dark ? "rgba(252,251,252,0.60)" : "var(--color-muted)",
                     maxWidth: "58ch",
                   }}
                 >
@@ -248,7 +243,7 @@ export default function SolutionsGrid() {
                         style={{
                           fontSize: "0.875rem",
                           lineHeight: 1.5,
-                          color: s.dark ? "rgba(252,251,252,0.75)" : "#0E2646",
+                          color: s.dark ? "rgba(252,251,252,0.75)" : "var(--color-navy)",
                         }}
                       >
                         {f}
