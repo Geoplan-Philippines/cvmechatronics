@@ -3,6 +3,7 @@ import Nav from "@/app/layout/nav";
 import Footer from "@/app/layout/footer";
 import ContactsHero from "./_sections/hero";
 import Inquiry from "./_sections/inquiry";
+import CalendarSection from "./_sections/calendar";
 
 export const metadata: Metadata = {
   title: "Contact Us — CV Mechatronics",
@@ -17,6 +18,7 @@ export default function ContactsPage() {
       <main>
         <ContactsHero />
         <Inquiry />
+        <CalendarSection />
       </main>
       <Footer />
     </>
