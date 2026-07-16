@@ -26,16 +26,18 @@ export default async function BlogList() {
               href={`/blog/${featured.slug}`}
               className="group block rounded-lg overflow-hidden bg-surface transition-shadow duration-150 hover:shadow-[0_2px_8px_rgba(14,38,70,0.10)] md:grid md:grid-cols-2"
             >
-              <div className="relative min-h-[260px] md:min-h-[340px]">
-                <Image
-                  src={featured.coverImage}
-                  alt={featured.coverAlt}
-                  fill
-                  className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  priority
-                />
-              </div>
+              {featured.coverImage && (
+                <div className="relative min-h-[260px] md:min-h-[340px]">
+                  <Image
+                    src={featured.coverImage}
+                    alt={featured.coverAlt}
+                    fill
+                    className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    priority
+                  />
+                </div>
+              )}
               <div className="p-8 lg:p-10 flex flex-col justify-center">
                 <div className="flex items-center gap-3 mb-4">
                   <span
@@ -88,13 +90,15 @@ export default async function BlogList() {
                 className="group flex flex-col h-full rounded-lg overflow-hidden bg-surface transition-shadow duration-150 hover:shadow-[0_2px_8px_rgba(14,38,70,0.10)]"
               >
                 <div className="relative shrink-0" style={{ height: "200px" }}>
-                  <Image
-                    src={p.coverImage}
-                    alt={p.coverAlt}
-                    fill
-                    className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
+                  {p.coverImage && (
+                    <Image
+                      src={p.coverImage}
+                      alt={p.coverAlt}
+                      fill
+                      className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                  )}
                   <div
                     className="absolute inset-0"
                     style={{ background: "rgba(14,38,70,0.30)" }}

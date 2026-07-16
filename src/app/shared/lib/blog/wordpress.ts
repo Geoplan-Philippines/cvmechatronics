@@ -80,22 +80,32 @@ function mapPost(wp: WpPost): BlogPost {
 
 export async function fetchWordPressPosts(): Promise<BlogPost[]> {
   if (!API) return [];
-  const res = await fetch(`${API}/wp-json/wp/v2/posts?_embed&per_page=50`, {
-    next: { revalidate: 60 },
-  });
-  if (!res.ok) return [];
-  const data = (await res.json()) as WpPost[];
-  return data.map(mapPost);
+  // Connection-level failures (DNS, timeout, refused) throw here, and a
+  // malformed body throws in .json(); either way, fall back to sample data.
+  try {
+    const res = await fetch(`${API}/wp-json/wp/v2/posts?_embed&per_page=50`, {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) return [];
+    const data = (await res.json()) as WpPost[];
+    return data.map(mapPost);
+  } catch {
+    return [];
+  }
 }
 
 export async function fetchWordPressPost(
   slug: string,
 ): Promise<BlogPost | null> {
   if (!API) return null;
-  const res = await fetch(`${API}/wp-json/wp/v2/posts?slug=${slug}&_embed`, {
-    next: { revalidate: 60 },
-  });
-  if (!res.ok) return null;
-  const data = (await res.json()) as WpPost[];
-  return data[0] ? mapPost(data[0]) : null;
+  try {
+    const res = await fetch(`${API}/wp-json/wp/v2/posts?slug=${slug}&_embed`, {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) return null;
+    const data = (await res.json()) as WpPost[];
+    return data[0] ? mapPost(data[0]) : null;
+  } catch {
+    return null;
+  }
 }
