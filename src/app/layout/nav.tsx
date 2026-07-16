@@ -11,6 +11,7 @@ const MotionLink = motion.create(Link);
 const links = [
   { label: "Solutions", href: "/solutions" },
   { label: "Products", href: "/products" },
+  { label: "Blog", href: "/blog" },
 ];
 
 export default function Nav() {
