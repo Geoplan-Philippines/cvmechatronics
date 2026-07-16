@@ -1,13 +1,5 @@
 # Claude Code Project Instructions
 
-## Required Project Rules
-
-Before making changes, read and follow:
-
-- `.claude/rules/angular-standards.md`
-- `.claude/rules/theming.md`
-- `.claude/rules/architecture.md`
-
 ## Skills
 
 Project-specific skills are located in:

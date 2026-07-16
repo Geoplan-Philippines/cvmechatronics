@@ -2,6 +2,16 @@ import * as motion from "motion/react-client";
 
 const ease = [0.25, 1, 0.5, 1] as const;
 
+/**
+ * Google Calendar appointment-scheduling embed. Overridable via env so the
+ * booking owner (staff calendar / link) can change without a code deploy,
+ * mirroring the WORDPRESS_API_URL pattern. Falls back to the current calendar
+ * so the embed always renders when the env var is unset.
+ */
+const BOOKING_CALENDAR_URL =
+  process.env.BOOKING_CALENDAR_URL ??
+  "https://calendar.google.com/calendar/appointments/schedules/AcZssZ0kwyMMEwGRDvJGVgx5GRQ5n1h8S5GfhNo3zdRgIaLYokTpWKbT0fJK5kQF1wMF7nB8ndalU7g6?gv=true";
+
 export default function CalendarSection() {
   return (
     <section style={{ backgroundColor: "var(--color-surface)", padding: "clamp(4rem,7vw,7rem) 0" }}>
@@ -43,11 +53,11 @@ export default function CalendarSection() {
             }}
           >
             <iframe
-              src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0kwyMMEwGRDvJGVgx5GRQ5n1h8S5GfhNo3zdRgIaLYokTpWKbT0fJK5kQF1wMF7nB8ndalU7g6?gv=true"
+              src={BOOKING_CALENDAR_URL}
               style={{ border: 0, display: "block", width: "100%", minHeight: "700px" }}
               height="700"
-              frameBorder={0}
               title="Book an appointment with CV Mechatronics"
+              loading="lazy"
             />
           </div>
         </motion.div>

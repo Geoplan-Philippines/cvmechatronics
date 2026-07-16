@@ -1,3 +1,4 @@
+import { BLOG_CATEGORIES } from "./types";
 import type { BlogCategory, BlogPost } from "./types";
 
 /**
@@ -7,8 +8,9 @@ import type { BlogCategory, BlogPost } from "./types";
  *   1. Set WORDPRESS_API_URL, e.g. https://cms.cvmechatronics.com
  *   2. Add the WordPress host to next.config.ts images.remotePatterns
  *      (featured images are served from there).
- *   3. Sanitize `content.rendered` before rendering — it becomes externally
- *      authored HTML. Recommended: isomorphic-dompurify in article-body.tsx.
+ *
+ * `content.rendered` is externally-authored HTML; it is sanitized before render
+ * in article-body.tsx (isomorphic-dompurify).
  *
  * REST endpoint: GET {API}/wp-json/wp/v2/posts?_embed
  * `_embed` inlines featured media, author, and taxonomy terms.
@@ -32,6 +34,17 @@ type WpPost = {
     "wp:term"?: WpTerm[][];
   };
 };
+
+/**
+ * WordPress category names should mirror the BlogCategory union, but the WP
+ * taxonomy is edited independently — a typo or new term would otherwise be cast
+ * to a lie. Validate against the known set and fall back to "News".
+ */
+function toBlogCategory(name: string | undefined): BlogCategory {
+  return name && (BLOG_CATEGORIES as string[]).includes(name)
+    ? (name as BlogCategory)
+    : "News";
+}
 
 function stripHtml(html: string): string {
   return html.replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim();
@@ -57,8 +70,7 @@ function mapPost(wp: WpPost): BlogPost {
     contentHtml: wp.content.rendered,
     coverImage: media?.source_url ?? "",
     coverAlt: media?.alt_text ?? "",
-    // WordPress category names should mirror the BlogCategory union.
-    category: (categoryName as BlogCategory) ?? "News",
+    category: toBlogCategory(categoryName),
     tags,
     author: { name: wp._embedded?.author?.[0]?.name ?? "CV Mechatronics" },
     publishedAt: wp.date,

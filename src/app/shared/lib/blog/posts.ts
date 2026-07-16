@@ -35,6 +35,7 @@ export async function getAllPostSlugs(): Promise<string[]> {
   return posts.map((p) => p.slug);
 }
 
+/** Scaffolding for the planned category-filter UI; not yet wired into a route. */
 export async function getPostsByCategory(
   category: BlogCategory,
 ): Promise<BlogPost[]> {
