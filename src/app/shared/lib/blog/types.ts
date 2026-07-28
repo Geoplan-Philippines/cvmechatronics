@@ -16,6 +16,13 @@ export type RelatedProduct = {
   href: string;
 };
 
+export type GalleryImage = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+};
+
 export type BlogPost = {
   slug: string;
   title: string;
@@ -32,4 +39,6 @@ export type BlogPost = {
   readingMinutes: number;
   /** Set on product-spotlight posts to cross-link into the catalog. */
   relatedProduct?: RelatedProduct;
+  /** 1–5 images from the WP "Gallery" field, rendered as a mosaic after the body. */
+  gallery?: GalleryImage[];
 };

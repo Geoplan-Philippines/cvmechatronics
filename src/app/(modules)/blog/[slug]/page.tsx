@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import Nav from "@/app/layout/nav";
 import Footer from "@/app/layout/footer";
 import AnimateIn from "@/app/shared/ui/animate-in";
+import Gallery from "@/app/shared/ui/gallery";
 import { getAllPostSlugs, getPostBySlug } from "@/app/shared/lib/blog/posts";
 import { formatDate } from "@/app/shared/lib/blog/format";
 import ArticleBody from "./_sections/article-body";
@@ -139,6 +140,10 @@ export default async function BlogPostPage({
 
             <AnimateIn>
               <ArticleBody html={post.contentHtml} />
+            </AnimateIn>
+
+            <AnimateIn>
+              <Gallery images={post.gallery} />
             </AnimateIn>
 
             {/* Tags */}
