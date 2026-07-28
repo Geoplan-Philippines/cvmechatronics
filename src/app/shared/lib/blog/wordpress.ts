@@ -1,5 +1,5 @@
 import { BLOG_CATEGORIES } from "./types";
-import type { BlogCategory, BlogPost } from "./types";
+import type { BlogCategory, BlogPost, GalleryImage } from "./types";
 
 /**
  * Headless WordPress adapter (REST API — no plugin required).
@@ -28,6 +28,8 @@ type WpPost = {
   title: WpRendered;
   excerpt: WpRendered;
   content: WpRendered;
+  /** Registered by wordpress/mu-plugins/gallery-field.php (1–5 images). */
+  gallery?: GalleryImage[];
   _embedded?: {
     "wp:featuredmedia"?: { source_url: string; alt_text: string }[];
     author?: { name: string }[];
@@ -75,6 +77,7 @@ function mapPost(wp: WpPost): BlogPost {
     author: { name: wp._embedded?.author?.[0]?.name ?? "CV Mechatronics" },
     publishedAt: wp.date,
     readingMinutes: readingMinutes(wp.content.rendered),
+    gallery: (wp.gallery ?? []).filter((g) => g.src).slice(0, 5),
   };
 }
 
